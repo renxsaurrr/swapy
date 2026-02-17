@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In - SWAPY</title>
+
+    <!-- Bootstrap 5: A CSS framework for responsive design -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Bootstrap Icons: Icon library for UI elements -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="loginPage.css">
+    <link rel="stylesheet" href="../animations/swapy-animations.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="../landingPage.html">
+                <div class="brand-icon">
+                    <i class="bi bi-arrow-left-right"></i>
+                </div>
+                <span class="brand-text">SWAPY</span>
+            </a>
+
+            <div class="navbar-actions">
+                <a href="../landingPage.html" class="btn btn-outline-primary">
+                    <i class="bi bi-house-door me-1"></i> Back to Home
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="auth-section">
+        
+        <!-- Background Elements -->
+        <div class="auth-background"></div>
+        <div class="auth-overlay"></div>    
+
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-xl-5 col-lg-6 col-md-8">
+                    
+                    <!-- auth card -->
+                    <div class="auth-card">
+                        
+                        <!-- allows users to switch between sign in and sign up -->
+                        <div class="auth-tabs">
+
+                            <!-- sign in tab btn -->
+                            <button class="auth-tab active" onclick="showSignIn()">
+                                <i class="bi bi-box-arrow-in-right me-2"></i>Sign In
+                            </button>
+                            
+                            <!-- sign up tab btn -->
+                            <button class="auth-tab" onclick="showSignUp()">
+                                <i class="bi bi-person-plus me-2"></i>Sign Up
+                            </button>
+                        </div>
+
+                        <!-- sign in form -->
+                        <div id="signInForm" class="auth-form-container">
+                            <div class="form-header">
+                                <h2 class="form-title">Welcome Back</h2>
+                                <p class="form-subtitle">Sign in to continue your trading journey</p>
+                            </div>
+                            <form id="loginForm" onsubmit="handleSignIn(event)">
+                                <!-- email input field -->
+                                <div class="form-floating mb-3">
+                                    <input 
+                                        type="email" 
+                                        class="form-control" 
+                                        id="signInEmail" 
+                                        placeholder="name@example.com" 
+                                        required>
+                                    <label for="signInEmail">
+                                        <i class="bi bi-envelope me-2"></i>Email Address
+                                    </label>
+                                </div>
+
+                                <!-- pass input -->
+                                <div class="form-floating mb-3">
+                                    <input 
+                                        type="password" 
+                                        class="form-control" 
+                                        id="signInPassword" 
+                                        placeholder="Password" 
+                                        required>
+                                    <label for="signInPassword">
+                                        <i class="bi bi-lock me-2"></i>Password
+                                    </label>
+                                    
+                                    <!-- toggle pass -->
+                                    <button 
+                                        type="button" 
+                                        class="password-toggle" 
+                                        onclick="togglePassword('signInPassword', this)">
+                                        <i class="bi bi-eye"></i>
+                                    </button>
+                                </div>
+
+                                <!-- remember me -->
+                                <div class="d-flex justify-content-between align-items-center mb-4">
+                                    <div class="form-check">
+                                        <input 
+                                            class="form-check-input" 
+                                            type="checkbox" 
+                                            id="rememberMe">
+                                        <label class="form-check-label" for="rememberMe">
+                                            Remember me
+                                        </label>
+                                    </div>
+                                    
+                                    <!-- forgot password link -->
+                                    <a href="#" class="link-primary">Forgot Password?</a>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary w-100 btn-lg mb-3">
+                                    <i class="bi bi-box-arrow-in-right me-2"></i>Sign In
+                                </button>
+
+                                <!-- divider -->
+                                <div class="divider">
+                                    <span>or continue with</span>
+                                </div>
+
+                                <!-- Social Login Buttons -->
+                                <div class="social-buttons">
+                                    <!-- Google Sign In Button -->
+                                    <button type="button" class="btn btn-social">
+                                        <!-- google logo -->
+                                        <svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.874 2.684-6.615z" fill="#4285F4"/>
+                                            <path d="M9.003 18c2.43 0 4.467-.806 5.956-2.18L12.05 13.56c-.806.54-1.836.86-3.047.86-2.344 0-4.328-1.584-5.036-3.711H.96v2.332C2.438 15.983 5.482 18 9.003 18z" fill="#34A853"/>
+                                            <path d="M3.964 10.712c-.18-.54-.282-1.117-.282-1.71 0-.593.102-1.17.282-1.71V4.96H.957C.347 6.175 0 7.55 0 9.002c0 1.452.348 2.827.957 4.042l3.007-2.332z" fill="#FBBC05"/>
+                                            <path d="M9.003 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.464.891 11.428 0 9.002 0 5.48 0 2.438 2.017.96 4.958L3.967 7.29c.708-2.127 2.692-3.71 5.036-3.71z" fill="#EA4335"/>
+                                        </svg>
+                                        Google
+                                    </button>
+                                    
+                                    <!-- Facebook Sign In Button -->
+                                    <button type="button" class="btn btn-social">
+                                        <i class="bi bi-facebook"></i>
+                                        Facebook
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- sign up form -->
+                        <div id="signUpForm" class="auth-form-container" style="display: none;">
+
+                            <div class="form-header">
+                                <h2 class="form-title">Create Account</h2>
+                                <p class="form-subtitle">Join SWAPY and start trading today</p>
+                            </div>
+
+                            <form id="registerForm" onsubmit="handleSignUp(event)">
+                                <div class="row g-3 mb-3">
+                                    <!-- First Name -->
+                                    <div class="col-md-6">
+                                        <div class="form-floating">
+                                            <input 
+                                                type="text" 
+                                                class="form-control" 
+                                                id="firstName" 
+                                                placeholder="John" 
+                                                required>
+                                            <label for="firstName">First Name</label>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Last Name -->
+                                    <div class="col-md-6">
+                                        <div class="form-floating">
+                                            <input 
+                                                type="text" 
+                                                class="form-control" 
+                                                id="lastName" 
+                                                placeholder="Doe" 
+                                                required>
+                                            <label for="lastName">Last Name</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Email Address -->
+                                <div class="form-floating mb-3">
+                                    <input 
+                                        type="email" 
+                                        class="form-control" 
+                                        id="signUpEmail" 
+                                        placeholder="name@example.com" 
+                                        required>
+                                    <label for="signUpEmail">
+                                        <i class="bi bi-envelope me-2"></i>Email Address
+                                    </label>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label-custom">
+                                        <i class="bi bi-phone me-2"></i>Phone Number
+                                    </label>
+                                    
+                                    <!-- phone input container -->
+                                    <div class="phone-split-container">
+                                        
+                                        <!-- select country -->
+                                        <div class="country-select-wrapper">
+                                            <!-- select coutnry button -->
+                                            <button 
+                                                type="button" 
+                                                class="country-select-btn" 
+                                                id="countrySelectBtn" 
+                                                >
+                                                <span class="country-flag-selected" id="selectedFlag">🇺🇸</span>
+                                                <span class="country-code-selected" id="selectedCode">+1</span>
+                                                <i class="bi bi-chevron-down dropdown-icon"></i>
+                                            </button>
+                                            
+                                            <!-- country dropdown panel -->
+                                            <div class="country-dropdown-panel" id="countryDropdownPanel">
+                                                <!-- search box -->
+                                                <div class="country-search-box">
+                                                    <i class="bi bi-search"></i>
+                                                    <input 
+                                                        type="text" 
+                                                        id="countrySearchInput" 
+                                                        placeholder="Search country..." 
+                                                        autocomplete="off">
+                                                </div>
+                                                
+                                                <!-- country options list -->
+                                                <div class="country-options-list" id="countryOptionsList">
+                                                    <!-- try pa nato butang more countries by login.js -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- phone num input-->
+                                        <input 
+                                            type="tel" 
+                                            class="phone-number-input" 
+                                            id="phoneNumber" 
+                                            placeholder="201 555 0123"
+                                            required>
+                                    </div>
+                                </div>
+
+                                <!-- password input -->
+                                <div class="form-floating mb-3">
+                                    <input 
+                                        type="password" 
+                                        class="form-control" 
+                                        id="signUpPassword" 
+                                        placeholder="Password" 
+                                        required>
+                                    <label for="signUpPassword">
+                                        <i class="bi bi-lock me-2"></i>Password
+                                    </label>
+                                    
+                                    <!-- password visibility toggle -->
+                                    <button 
+                                        type="button" 
+                                        class="password-toggle" 
+                                        onclick="togglePassword('signUpPassword', this)">
+                                        <i class="bi bi-eye"></i>
+                                    </button>
+                                </div>
+
+                                <!-- confirm password input -->
+                                <div class="form-floating mb-3">
+                                    <input 
+                                        type="password" 
+                                        class="form-control" 
+                                        id="confirmPassword" 
+                                        placeholder="Confirm Password" 
+                                        required>
+                                    <label for="confirmPassword">
+                                        <i class="bi bi-lock-fill me-2"></i>Confirm Password
+                                    </label>
+
+                                    <button 
+                                        type="button" 
+                                        class="password-toggle" 
+                                        onclick="togglePassword('confirmPassword', this)">
+                                        <i class="bi bi-eye"></i>
+                                    </button>
+                                </div>
+
+                                <!-- terms of service checkbox -->
+                                <div class="form-check mb-4">
+                                    <input 
+                                        class="form-check-input" 
+                                        type="checkbox" 
+                                        id="agreeTerms" 
+                                        required>
+                                    <label class="form-check-label" for="agreeTerms">
+                                        I agree to the 
+                                        <a href="#" class="link-primary">Terms of Service</a> 
+                                        and 
+                                        <a href="#" class="link-primary">Privacy Policy</a>
+                                    </label>
+                                </div>
+
+                                <!-- create account submit button -->
+                                <button type="submit" class="btn btn-primary w-100 btn-lg mb-3" >
+                                    <i class="bi bi-person-check me-2"></i>Create Account
+                                </button>
+  
+                                <!-- divider or <hr> -->
+                                <div class="divider">
+                                    <span>or continue with</span>
+                                </div>
+
+                                <!-- social sign up buttons -->
+                                <div class="social-buttons">
+                                    <!-- google sign up button -->
+                                    <button type="button" class="btn btn-social">
+                                        <!-- google logo icon -->
+                                        <svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.874 2.684-6.615z" fill="#4285F4"/>
+                                            <path d="M9.003 18c2.43 0 4.467-.806 5.956-2.18L12.05 13.56c-.806.54-1.836.86-3.047.86-2.344 0-4.328-1.584-5.036-3.711H.96v2.332C2.438 15.983 5.482 18 9.003 18z" fill="#34A853"/>
+                                            <path d="M3.964 10.712c-.18-.54-.282-1.117-.282-1.71 0-.593.102-1.17.282-1.71V4.96H.957C.347 6.175 0 7.55 0 9.002c0 1.452.348 2.827.957 4.042l3.007-2.332z" fill="#FBBC05"/>
+                                            <path d="M9.003 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.464.891 11.428 0 9.002 0 5.48 0 2.438 2.017.96 4.958L3.967 7.29c.708-2.127 2.692-3.71 5.036-3.71z" fill="#EA4335"/>
+                                        </svg>
+                                        Google
+                                    </button>
+                                    
+                                    <!-- facebook sign up button -->
+                                    <button type="button" class="btn btn-social">
+                                        <i class="bi bi-facebook"></i>
+                                        Facebook
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- end: sign up form -->
+                        
+                    </div>
+                    <!-- end: auth Card -->
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TOAST NOTIFICATION -->
+<div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 9999;">
+    <div id="successToast" class="toast align-items-center border-0" role="alert">
+        <div class="d-flex">
+            <div class="toast-body d-flex align-items-center gap-2">
+                <i id="toastIcon" class="bi bi-check-circle-fill" style="font-size: 1.2rem;"></i>
+                <span id="toastMessage">Success!</span> 
+            </div>
+            <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast"></button>
+        </div>
+    </div>
+</div>
+   
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <!-- Footer Brand -->
+                    <div class="footer-brand">
+                        <div class="brand-icon">
+                            <i class="bi bi-arrow-left-right"></i>
+                        </div>
+                        <span class="brand-text">SWAPY</span>
+                    </div>
+
+                    <p class="footer-description">
+                        The modern way to trade. From everyday items to real estate, 
+                        connect with traders worldwide and swap value without cash.
+                    </p>
+                    
+                    <!-- Social Media Links -->
+                    <div class="social-links">
+                        <a href="#"><i class="bi bi-facebook"></i></a>
+                        <a href="#"><i class="bi bi-twitter"></i></a>
+                        <a href="#"><i class="bi bi-instagram"></i></a>
+                        <a href="#"><i class="bi bi-linkedin"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-4">
+                    <h4 class="footer-title">Platform</h4>
+                    <ul class="footer-links">
+                        <li><a href="draft.html">Browse Items</a></li>
+                        <li><a href="draft.html">How It Works</a></li>
+                        <li><a href="draft.html">Pricing</a></li>
+                        <li><a href="#">Mobile App</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-2 col-md-4">
+                    <h4 class="footer-title">Support</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Safety Tips</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Report Issue</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-2 col-md-4">
+                    <h4 class="footer-title">Company</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Press</a></li>
+                        <li><a href="#">Partners</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-2 col-md-4">
+                    <h4 class="footer-title">Legal</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 SWAPY. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- bootstrap js for interactive components -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="loginPage.js"></script>
+</body>
+</html>
